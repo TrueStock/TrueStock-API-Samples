@@ -17,7 +17,7 @@ To get started, follow these instructions:
 This will include getting a store location, creating a store location, generating a forecast and finally outputting the result.
 
 ## Tips:
-- store locations can be managed from https://app-preprod.truestock.io/locations/all
+- store locations can be managed from https://app.truestock.io/locations/all
 - You may get an error with creating the store location.  If this happens, this may be because the address being inputted is already within our system, therefore we don't allow for duplicates so try adding another address.
  
 ## Documentation  
