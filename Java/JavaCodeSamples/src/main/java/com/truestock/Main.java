@@ -91,7 +91,7 @@ public class Main {
 
     }
 
-    private static void getStoreOptions() {
+    private static void getStoreOptions() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/user/store-location/options"))
@@ -101,6 +101,9 @@ public class Main {
                 .build();
 
         sendRequest(client, request);
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
 
     }
 
