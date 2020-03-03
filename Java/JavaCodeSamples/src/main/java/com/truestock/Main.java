@@ -29,7 +29,6 @@ public class Main {
     private static String csv = " ";
 
 
-
     public static void main(String[] args) throws IOException, InterruptedException {
 
         getStoreOptions();
@@ -37,14 +36,14 @@ public class Main {
         //store locations can be managed from https://app.truestock.io/locations/all
         //Does not accept duplicates. eg. if longitude and latitude of a store address already exists.
         String newLocationObject = createStoreLocation("Northern", "UnitedKingdom", "GB",
-                "57 Main St, Ballymena, BT42 4JP");
+                "54 Rabans Close, Aylesbury, HP19 8RS");
 
         System.out.println(newLocationObject);
         JsonElement element = new JsonParser().parse(newLocationObject);
         JsonObject json = element.getAsJsonObject();
         String newLocationObjectId = json.get("id").getAsString();
         String storeLocationDetails = getStoreLocation(newLocationObjectId);
-        String forecastDistance = "3";
+        String forecastDistance = "10";
 
         JsonElement jsonElement1 = new JsonParser().parse(storeLocationDetails);
         JsonObject jsonObject2 = jsonElement1.getAsJsonObject();
@@ -78,6 +77,7 @@ public class Main {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
         if (response.statusCode() == 500) {
             System.out.println("Already exists. Enter new address");
             try {
@@ -91,20 +91,16 @@ public class Main {
 
     }
 
-    private static void getStoreOptions() throws IOException, InterruptedException {
+    private static String getStoreOptions() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/user/store-location/options"))
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + token)
+                .header("Authorization", "Bearer " + "5QhDChrQuPhIPxIYz6jteQzlqtBdUJ")
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
-
+        return sendRequest(client, request);
     }
 
 
@@ -117,12 +113,10 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
+        return sendRequest(client, request);
     }
 
-    private static void getAllForecasts(int pageNumber) throws IOException, InterruptedException {
+    private static String getAllForecasts(int pageNumber) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/forecast/all?page=" + pageNumber))
@@ -131,11 +125,7 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString())
-        return response.body();
-
+        return sendRequest(client, request);
     }
 
     private static String getForecastResultCSV(String forecastId) throws IOException, InterruptedException {
@@ -147,10 +137,7 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return response.body();
+        return sendRequest(client, request);
     }
 
     private static String getStoreLocation(String endpoint) throws IOException, InterruptedException {
@@ -162,17 +149,15 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return sendRequest(client, request);
 
-        return response.body();
     }
 
-    private static void sendRequest(HttpClient client, HttpRequest request) {
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
+    private static String sendRequest(HttpClient client, HttpRequest request) throws IOException, InterruptedException {
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        String body = response.body();
+        System.out.println(body);
+        return body;
     }
 
     private static String getForecastInput(int forecastId) throws IOException, InterruptedException {
@@ -184,13 +169,10 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return response.body();
+        return sendRequest(client, request);
     }
 
-    private static String getForecastResultJSON(int forecastId) throws IOException, InterruptedException {
+    private static void getForecastResultJSON(int forecastId) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "forecast/get/result/" + forecastId + "/"))
@@ -200,8 +182,6 @@ public class Main {
                 .build();
 
         sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        return response.body();
     }
 
     private static String createRetailForecast(String forecastHorizon, String stockName, String storeLocation) throws IOException, InterruptedException {
@@ -255,11 +235,7 @@ public class Main {
                 .GET()
                 .build();
 
-        sendRequest(client, request);
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        return response.body();
-
+        return sendRequest(client, request);
     }
 
 
