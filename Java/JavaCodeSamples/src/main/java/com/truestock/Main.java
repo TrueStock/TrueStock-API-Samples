@@ -71,7 +71,7 @@ public class Main {
         String requestBody = objectMapper.writeValueAsString(values);
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://janus-api-preprod.truestock.io/user/store-location"))
+                .uri(URI.create(url + "/user/store-location"))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
@@ -94,7 +94,7 @@ public class Main {
     private static void getStoreOptions() {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://janus-api-preprod.truestock.io/user/store-location/options"))
+                .uri(URI.create(url + "/user/store-location/options"))
                 .header("Content-Type", "application/json")
                 .header("Authorization", "Bearer " + token)
                 .GET()
