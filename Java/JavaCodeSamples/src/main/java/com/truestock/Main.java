@@ -96,7 +96,7 @@ public class Main {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/user/store-location/options"))
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + "5QhDChrQuPhIPxIYz6jteQzlqtBdUJ")
+                .header("Authorization", "Bearer " + token)
                 .GET()
                 .build();
 
