@@ -1,5 +1,5 @@
 # update to match your API token
-API_KEY = ''
+API_KEY = ' '
 # url
 URL = 'https://janus-api.truestock.io/'
 

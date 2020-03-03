@@ -67,10 +67,12 @@ if __name__ == '__main__':
 
     # store locations can be managed from https://app.truestock.io/locations/all
     # Does not accept duplicates. eg. if longitude and latitude of a store address already exists.
-    location_id = create_store_location('Northern', 'UnitedKingdom', 'GB',
-                                        'Unit 1, Ratio Point, St. Richards Rd, Evesham, WR11 1ZG')
+    newLocationObject = create_store_location('Northern', 'UnitedKingdom', 'GB',
+                                              'Unit 1, Ratio Point, St. Richards Rd, Evesham, WR11 1ZG')
 
-    storeLocationDetails = get_store_location('user/store-location/' + str(location_id.get('id')))
+    print(newLocationObject)
+
+    storeLocationDetails = get_store_location('user/store-location/' + str(newLocationObject.get('id')))
 
     forecastDistance = 3
 
