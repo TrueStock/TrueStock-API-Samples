@@ -108,7 +108,7 @@ public class Main {
     }
 
 
-    private static void getAllStoreLocation(int pageNumber) {
+    private static String getAllStoreLocation(int pageNumber) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/user/store-location/all?page=" + pageNumber))
@@ -118,9 +118,11 @@ public class Main {
                 .build();
 
         sendRequest(client, request);
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 
-    private static void getAllForecasts(int pageNumber) {
+    private static void getAllForecasts(int pageNumber) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "/forecast/all?page=" + pageNumber))
@@ -129,10 +131,11 @@ public class Main {
                 .GET()
                 .build();
 
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
-                .join();
+        sendRequest(client, request);
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString())
+        return response.body();
+
     }
 
     private static String getForecastResultCSV(String forecastId) throws IOException, InterruptedException {
@@ -172,7 +175,7 @@ public class Main {
                 .join();
     }
 
-    private static void getForecastInput(int forecastId) {
+    private static String getForecastInput(int forecastId) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "forecast/get/input/" + forecastId + "/"))
@@ -182,9 +185,12 @@ public class Main {
                 .build();
 
         sendRequest(client, request);
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        return response.body();
     }
 
-    private static void getForecastResultJSON(int forecastId) {
+    private static String getForecastResultJSON(int forecastId) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url + "forecast/get/result/" + forecastId + "/"))
@@ -194,6 +200,8 @@ public class Main {
                 .build();
 
         sendRequest(client, request);
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
     }
 
     private static String createRetailForecast(String forecastHorizon, String stockName, String storeLocation) throws IOException, InterruptedException {
