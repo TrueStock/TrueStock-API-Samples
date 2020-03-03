@@ -21,10 +21,11 @@ To get started, follow these instructions:
 1. If you haven't done it already, make a fork of this repo.
 2. Clone to your local computer using git.
 3. Make sure you have Java 13 or later installed.
-4. Find the src/main/java/com/truestock/main.java file within the project and input your API key along with the csv file you would like to upload.
-5. We have also provided an example one for you csv called "Retail_Mock_Data".csv which you can use to demo how the truestock API predicts demand.
-6. If you would like to create your own CSV file then we recommend using a random data generator like https://mockaroo.com/ to generate your own mock data and provide you with a csv.
-7. Once done, simply execute and one-click run the main.java file to see a demonstration of using several of the Truestock endpoints. 
+4. Review the pom.xml and install the required dependencies using maven.
+5. Find the src/main/java/com/truestock/main.java file within the project and input your API key along with the csv file you would like to upload.
+6. We have also provided an example one for you csv called "Retail_Mock_Data".csv which you can use to demo how the truestock API predicts demand.
+7. If you would like to create your own CSV file then we recommend using a random data generator like https://mockaroo.com/ to generate your own mock data and provide you with a csv.
+8. Once done, simply execute and one-click run the main.java file to see a demonstration of using several of the Truestock endpoints. 
 
 This will include getting a store location, creating a store location, generating a forecast and finally outputting the result.
 ## Tips:
