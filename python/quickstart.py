@@ -6,7 +6,7 @@ from forecasts import create_retail_forecast, get_forecast_result_csv
 
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer {token}'.format(token='5QhDChrQuPhIPxIYz6jteQzlqtBdUJ'),
+    'Authorization': 'Bearer {token}'.format(token=API_KEY),
 
 }
 
@@ -80,4 +80,4 @@ if __name__ == '__main__':
                                              storeLocationDetails.get('id'))
 
     csvData = get_forecast_result_csv(forecastDetails.get("id"))
-    # print(csvData)
+    print(csvData)
